@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from app.ollama_service import ask_qwen
 
 app = FastAPI(title="Bank Statement Extractor")
 
@@ -17,3 +18,11 @@ def home():
         </body>
     </html>
     """
+
+
+@app.get("/ask")
+def ask():
+    response = ask_qwen("Say hello in one sentence.")
+    return {
+        "response": response
+    }
